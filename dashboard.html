@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Engage | NNPC Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/feather-icons"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#00843D',
+            secondary: '#FFC72C',
+          },
+          fontFamily: { sans: ['Inter', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-gray-50 font-sans flex h-screen overflow-hidden">
+  <!-- Sidebar -->
+  <div class="bg-primary text-white w-64 flex flex-col">
+    <div class="p-5 flex items-center space-x-3">
+      <div class="bg-white p-2 rounded-lg">
+        <i data-feather="message-square" class="text-primary w-6 h-6"></i>
+      </div>
+      <span class="text-xl font-bold">Engage</span>
+    </div>
+    <nav class="flex-1 px-4 space-y-2 mt-8">
+      <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg bg-white bg-opacity-20 text-white">
+        <i data-feather="grid"></i><span>Dashboard</span>
+      </a>
+      <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white hover:bg-opacity-10">
+        <i data-feather="briefcase"></i><span>Companies</span>
+      </a>
+      <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white hover:bg-opacity-10">
+        <i data-feather="map-pin"></i><span>Fields</span>
+      </a>
+      <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white hover:bg-opacity-10">
+        <i data-feather="mail"></i><span>Messages</span>
+      </a>
+      <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white hover:bg-opacity-10">
+        <i data-feather="file-text"></i><span>Reports</span>
+      </a>
+      <a href="#" class="flex items-center space-x-3 px-4 py-3 rounded-lg hover:bg-white hover:bg-opacity-10">
+        <i data-feather="settings"></i><span>Settings</span>
+      </a>
+    </nav>
+    <div class="p-4 border-t border-white border-opacity-20">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-full bg-white bg-opacity-20 flex items-center justify-center">
+          <i data-feather="user" class="text-white"></i>
+        </div>
+        <div>
+          <p class="font-medium">Admin User</p>
+          <p class="text-xs opacity-70">NNPC Admin</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="flex-1 flex flex-col overflow-hidden">
+    <!-- Top Bar -->
+    <header class="bg-white shadow-sm z-10">
+      <div class="flex items-center justify-between px-6 py-4">
+        <h2 class="text-xl font-semibold text-gray-800">Dashboard Overview</h2>
+        <div class="flex items-center space-x-4">
+          <div class="relative">
+            <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-primary focus:border-primary outline-none transition w-64">
+            <i data-feather="search" class="absolute left-3 top-2.5 text-gray-400"></i>
+          </div>
+          <button class="p-2 rounded-full hover:bg-gray-100 relative">
+            <i data-feather="bell"></i>
+            <span class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>
+          </button>
+          <div class="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+            <i data-feather="user" class="text-gray-600"></i>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Body -->
+    <main class="flex-1 overflow-y-auto p-6 bg-gray-50">
+      <!-- Stats Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Card Example -->
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-gray-500">Inbound Mails</p>
+              <h3 class="text-2xl font-bold mt-1">1,248</h3>
+            </div>
+            <div class="p-3 rounded-lg bg-primary bg-opacity-10 text-primary">
+              <i data-feather="inbox"></i>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-gray-500">Outbound Mails</p>
+              <h3 class="text-2xl font-bold mt-1">876</h3>
+            </div>
+            <div class="p-3 rounded-lg bg-secondary bg-opacity-10 text-secondary">
+              <i data-feather="send"></i>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-gray-500">Active Companies</p>
+              <h3 class="text-2xl font-bold mt-1">24</h3>
+            </div>
+            <div class="p-3 rounded-lg bg-blue-500 bg-opacity-10 text-blue-500">
+              <i data-feather="briefcase"></i>
+            </div>
+          </div>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100">
+          <div class="flex items-center justify-between">
+            <div>
+              <p class="text-sm text-gray-500">Active Fields</p>
+              <h3 class="text-2xl font-bold mt-1">18</h3>
+            </div>
+            <div class="p-3 rounded-lg bg-purple-500 bg-opacity-10 text-purple-500">
+              <i data-feather="map-pin"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Messages -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 mb-8">
+        <div class="px-6 py-4 border-b border-gray-100 flex items-center justify-between">
+          <h3 class="font-semibold text-gray-800">Recent Messages</h3>
+          <button class="text-sm text-primary hover:underline flex items-center">
+            <span>View All</span><i data-feather="chevron-right" class="w-4 h-4 ml-1"></i>
+          </button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="text-left text-sm text-gray-500 border-b border-gray-100">
+                <th class="px-6 py-3">Date</th>
+                <th class="px-6 py-3">From</th>
+                <th class="px-6 py-3">To</th>
+                <th class="px-6 py-3">Subject</th>
+                <th class="px-6 py-3">Status</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 text-sm">Oct 12, 2023</td>
+                <td class="px-6 py-4 text-sm font-medium">Shell Nigeria</td>
+                <td class="px-6 py-4 text-sm">NNPC Admin</td>
+                <td class="px-6 py-4 text-sm">Production Report</td>
+                <td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-700">Completed</span></td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 text-sm">Oct 10, 2023</td>
+                <td class="px-6 py-4 text-sm font-medium">Bonga Field</td>
+                <td class="px-6 py-4 text-sm">NNPC Admin</td>
+                <td class="px-6 py-4 text-sm">Maintenance Request</td>
+                <td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-700">Pending</span></td>
+              </tr>
+              <tr class="hover:bg-gray-50">
+                <td class="px-6 py-4 text-sm">Oct 8, 2023</td>
+                <td class="px-6 py-4 text-sm font-medium">Chevron Nigeria</td>
+                <td class="px-6 py-4 text-sm">NNPC Admin</td>
+                <td class="px-6 py-4 text-sm">Safety Documents</td>
+                <td class="px-6 py-4"><span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700">In Review</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Chart -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+        <h3 class="font-semibold text-gray-800 mb-4">Communications Overview</h3>
+        <canvas id="commChart" height="100"></canvas>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    feather.replace();
+    // Chart
+    const ctx = document.getElementById('commChart').getContext('2d');
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Inbound', 'Outbound'],
+        datasets: [{
+          label: 'Messages',
+          data: [1248, 876],
+          backgroundColor: ['#00843D', '#FFC72C']
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } }
+      }
+    });
+  </script>
+</body>
+</html>

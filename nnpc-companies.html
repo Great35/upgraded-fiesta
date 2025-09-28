@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engage | NNPC Companies</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00843D',
+                        secondary: '#FDB913',
+                        bglight: '#F5F5F5',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        .dashboard-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-bglight min-h-screen">
+    <div class="flex h-screen bg-bglight overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar bg-primary text-white w-64 flex-shrink-0">
+            <div class="p-4 border-b border-green-700">
+                <div class="flex items-center space-x-2">
+                    <i data-feather="shield" class="w-6 h-6"></i>
+                    <span class="font-bold text-lg">ENGAGE</span>
+                </div>
+            </div>
+               <nav class="p-4 space-y-2">
+                <a href="nnpc-dashboard.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition">
+                    <i data-feather="home" class="w-5 h-5"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="nnpc-companies.html" class="flex items-center space-x-2 p-2 rounded-lg bg-green-700">
+                    <i data-feather="briefcase" class="w-5 h-5"></i>
+                    <span>Companies</span>
+                </a>
+                <a href="nnpc-fields.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition">
+                    <i data-feather="map-pin" class="w-5 h-5"></i>
+                    <span>Fields</span>
+                </a>
+                <a href="nnpc-messages.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition">
+                    <i data-feather="mail" class="w-5 h-5"></i>
+                    <span>Messages</span>
+                </a>
+                <a href="nnpc-reports.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition">
+                    <i data-feather="file-text" class="w-5 h-5"></i>
+                    <span>Reports</span>
+                </a>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Bar -->
+            <header class="bg-white border-b border-gray-200 py-3 px-6 flex items-center justify-between">
+                <div class="relative w-64">
+                    <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
+                    <input type="text" placeholder="Search companies..." class="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition">
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-1 rounded-full hover:bg-gray-100">
+                        <i data-feather="bell" class="w-5 h-5 text-gray-600"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
+                            <i data-feather="user" class="w-4 h-4 text-gray-600"></i>
+                        </div>
+                        <span class="text-sm font-medium">Admin</span>
+                    </div>
+                </div>
+            </header>
+            <!-- Main Content -->
+            <main class="flex-1 overflow-y-auto p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h1 class="text-2xl font-bold text-gray-800">Registered Companies</h1>
+                    <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-green-700 transition font-bold">
+                        <i data-feather="plus" class="w-5 h-5 inline-block mr-1"></i> Add New Company
+                    </button>
+                </div>
+                <!-- Companies Table -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-4 border-b border-gray-200">
+                        <h2 class="font-medium text-lg">Companies</h2>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Company Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact Person</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Shell</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">John Smith</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">john.smith@shell.com</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">+234 800 123 4567</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-primary hover:text-green-700 mr-2">
+                                            <i data-feather="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-gray-700">
+                                            <i data-feather="edit" class="w-4 h-4"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Chevron</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Mary Johnson</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">mary.johnson@chevron.com</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">+234 800 987 6543</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Active</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-primary hover:text-green-700 mr-2">
+                                            <i data-feather="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-gray-700">
+                                            <i data-feather="edit" class="w-4 h-4"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Total</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Aliyu Musa</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">aliyu.musa@total.com</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">+234 800 456 7890</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Inactive</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-primary hover:text-green-700 mr-2">
+                                            <i data-feather="eye" class="w-4 h-4"></i>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-gray-700">
+                                            <i data-feather="edit" class="w-4 h-4"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        // Initialize feather icons
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Engage | Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#00843D',
+            secondary: '#FDB913',
+            bglight: '#F5F5F5',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .login-card {
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body class="bg-bglight min-h-screen flex items-center justify-center p-4">
+
+  <!-- Login Card -->
+  <div class="login-card bg-white rounded-xl p-8 w-full max-w-md">
+    <!-- Logo + Title -->
+    <div class="text-center mb-8">
+      <div class="flex justify-center mb-4">
+        <div class="bg-primary p-3 rounded-lg inline-block">
+          <i data-feather="lock" class="text-white w-8 h-8"></i>
+        </div>
+      </div>
+      <h1 class="text-2xl font-bold text-gray-800">ENGAGE</h1>
+      <p class="text-gray-600 mt-2">Secure Collaboration Portal</p>
+    </div>
+
+    <!-- Login Form -->
+    <form id="loginForm" class="space-y-4">
+      <!-- Email -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email address</label>
+        <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" required>
+      </div>
+
+      <!-- Password -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Password</label>
+        <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition" required>
+      </div>
+
+      <!-- Role Selection -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Login as:</label>
+        <input type="hidden" name="role" id="roleInput" value="nnpc">
+        <div class="grid grid-cols-3 gap-2">
+          <button type="button" class="role-btn py-2 px-3 border rounded-lg text-sm font-medium transition bg-primary text-white border-primary" data-role="nnpc">NNPC</button>
+          <button type="button" class="role-btn py-2 px-3 border rounded-lg text-sm font-medium transition border-gray-300 text-gray-700" data-role="jv">JV Partner</button>
+          <button type="button" class="role-btn py-2 px-3 border rounded-lg text-sm font-medium transition border-gray-300 text-gray-700" data-role="field">Field</button>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="w-full bg-primary hover:bg-green-700 text-white py-2 px-4 rounded-lg font-medium transition duration-300">
+        Sign In
+      </button>
+      <a href="#" class="text-sm text-primary hover:underline block text-center mt-3">Forgot your password?</a>
+    </form>
+  </div>
+
+  <script>
+    // Role selection with hidden input
+    document.querySelectorAll('.role-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.role-btn').forEach(b => {
+          b.classList.remove('bg-primary', 'text-white', 'border-primary');
+          b.classList.add('border-gray-300', 'text-gray-700');
+        });
+        this.classList.add('bg-primary', 'text-white', 'border-primary');
+        this.classList.remove('border-gray-300', 'text-gray-700');
+        document.getElementById('roleInput').value = this.dataset.role;
+      });
+    });
+
+    // Form submission with redirection
+    document.getElementById('loginForm').addEventListener('submit', function (e) {
+      e.preventDefault(); // Prevent default form submission
+      const role = document.getElementById('roleInput').value;
+      
+      // Simulate authentication (replace with actual backend call)
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // Replace this with your actual authentication logic
+      if (email && password) {
+        redirectToDashboard(role);
+      } else {
+        alert('Please enter valid email and password.');
+      }
+    });
+
+    // Redirect to the appropriate dashboard based on role
+    function redirectToDashboard(role) {
+      const dashboards = {
+        nnpc: 'nnpc_dashboard.html',
+        jv: 'jv_dashboard.html',
+        field: 'field_dashboard.html'
+      };
+      const dashboardUrl = dashboards[role] || 'default_dashboard.html'; // Fallback
+      window.location.href = dashboardUrl;
+    }
+
+    // Feather icons
+    document.addEventListener('DOMContentLoaded', () => {
+      feather.replace();
+    });
+  </script>
+
+</body>
+</html>

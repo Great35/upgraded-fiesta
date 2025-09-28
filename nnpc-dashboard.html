@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="NNPC Dashboard for managing communications and operations">
+    <title>Engage | NNPC Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js" defer></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00843D',
+                        secondary: '#FDB913',
+                        bglight: '#F5F5F5',
+                        accent: '#E5E7EB',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'sans-serif'],
+                    },
+                },
+            },
+        };
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .sidebar {
+            transition: transform 0.3s ease, width 0.3s ease;
+        }
+        .sidebar-closed {
+            transform: translateX(-100%);
+        }
+        .dashboard-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        .expandable-menu {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .expandable-menu.open {
+            max-height: 200px;
+        }
+        .focus-ring {
+            transition: outline 0.2s ease;
+        }
+        .focus-ring:focus {
+            outline: 2px solid #00843D;
+            outline-offset: 2px;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                position: fixed;
+                top: 0;
+                left: 0;
+                height: 100%;
+                z-index: 50;
+                width: 260px;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-bglight min-h-screen font-sans antialiased">
+    <div class="flex h-screen overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar bg-primary text-white w-64 flex-shrink-0 lg:static" role="navigation" aria-label="Main navigation">
+            <div class="p-4 border-b border-green-700">
+                <div class="flex items-center space-x-2">
+                    <i data-feather="shield" class="w-6 h-6" aria-hidden="true"></i>
+                    <span class="font-bold text-lg">ENGAGE</span>
+                </div>
+            </div>
+            <nav class="p-4 space-y-2">
+                <!-- Action Buttons -->
+                <button class="w-full flex items-center space-x-2 p-2 rounded-lg bg-green-700 hover:bg-green-600 transition focus-ring" aria-label="Create new thread">
+                    <i data-feather="plus" class="w-5 h-5" aria-hidden="true"></i>
+                    <span>New Thread</span>
+                </button>
+                <button class="w-full flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition focus-ring" aria-label="Create new letter">
+                    <i data-feather="file-text" class="w-5 h-5" aria-hidden="true"></i>
+                    <span>New Letter</span>
+                </button>
+                <button class="w-full flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition focus-ring" aria-label="Create new MOM">
+                    <i data-feather="edit" class="w-5 h-5" aria-hidden="true"></i>
+                    <span>MOM</span>
+                </button>
+                <hr class="border-green-700 my-2" aria-hidden="true">
+                <!-- Navigation Links -->
+                <a href="nnpc-inbound.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition focus-ring" aria-label="View inbound messages">
+                    <i data-feather="inbox" class="w-5 h-5" aria-hidden="true"></i>
+                    <span>Inbound</span>
+                </a>
+                <a href="nnpc-outbound.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition focus-ring" aria-label="View outbound messages">
+                    <i data-feather="send" class="w-5 h-5" aria-hidden="true"></i>
+                    <span>Outbound</span>
+                </a>
+                <hr class="border-green-700 my-2" aria-hidden="true">
+                <!-- Expandable Menus -->
+                <div>
+                    <button class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-green-700 transition focus-ring toggle-menu" data-target="companies-menu" aria-expanded="false" aria-controls="companies-menu">
+                        <div class="flex items-center space-x-2">
+                            <i data-feather="briefcase" class="w-5 h-5" aria-hidden="true"></i>
+                            <span>Companies</span>
+                        </div>
+                        <i data-feather="chevron-down" class="w-5 h-5 transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div id="companies-menu" class="expandable-menu pl-6" role="region">
+                        <a href="nnpc-companies.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">Shell</a>
+                        <a href="nnpc-companies.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">Chevron</a>
+                        <a href="nnpc-companies.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">ExxonMobil</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-green-700 transition focus-ring toggle-menu" data-target="fields-menu" aria-expanded="false" aria-controls="fields-menu">
+                        <div class="flex items-center space-x-2">
+                            <i data-feather="map-pin" class="w-5 h-5" aria-hidden="true"></i>
+                            <span>Fields</span>
+                        </div>
+                        <i data-feather="chevron-down" class="w-5 h-5 transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div id="fields-menu" class="expandable-menu pl-6" role="region">
+                        <a href="nnpc-fields.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">Field A</a>
+                        <a href="nnpc-fields.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">Field B</a>
+                        <a href="nnpc-fields.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">Field C</a>
+                    </div>
+                </div>
+                <div>
+                    <button class="w-full flex items-center justify-between p-2 rounded-lg hover:bg-green-700 transition focus-ring toggle-menu" data-target="functions-menu" aria-expanded="false" aria-controls="functions-menu">
+                        <div class="flex items-center space-x-2">
+                            <i data-feather="tool" class="w-5 h-5" aria-hidden="true"></i>
+                            <span>Functions</span>
+                        </div>
+                        <i data-feather="chevron-down" class="w-5 h-5 transition-transform" aria-hidden="true"></i>
+                    </button>
+                    <div id="functions-menu" class="expandable-menu pl-6" role="region">
+                        <a href="nnpc-functions.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">Function 1</a>
+                        <a href="nnpc-functions.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">Function 2</a>
+                        <a href="nnpc-functions.html" class="block p-2 text-sm hover:bg-green-700 rounded-lg transition focus-ring">Function 3</a>
+                    </div>
+                </div>
+                <a href="nnpc-settings.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition focus-ring" aria-label="Settings">
+                    <i data-feather="settings" class="w-5 h-5" aria-hidden="true"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden main-content">
+            <!-- Top Bar -->
+            <header class="bg-white border-b border-gray-200 py-3 px-6 flex items-center justify-between">
+                <button class="lg:hidden p-2 rounded-md hover:bg-gray-100 focus-ring" id="toggle-sidebar" aria-label="Toggle sidebar">
+                    <i data-feather="menu" class="w-6 h-6 text-gray-600"></i>
+                </button>
+                <div class="relative w-64">
+                    <i data-feather="search" class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" aria-hidden="true"></i>
+                    <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary outline-none transition focus-ring" aria-label="Search dashboard">
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-1 rounded-full hover:bg-gray-100 focus-ring" aria-label="Notifications">
+                        <i data-feather="bell" class="w-5 h-5 text-gray-600" aria-hidden="true"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500" aria-hidden="true"></span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
+                            <i data-feather="user" class="w-4 h-4 text-gray-600" aria-hidden="true"></i>
+                        </div>
+                        <span class="text-sm font-medium">Admin</span>
+                    </div>
+                </div>
+            </header>
+            <!-- Dashboard Content -->
+            <main class="flex-1 overflow-y-auto p-6" role="main">
+                <h1 class="text-2xl font-bold text-gray-800 mb-6">NNPC Dashboard</h1>
+                <!-- Summary Cards -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Inbound Mails</p>
+                                <p class="text-2xl font-bold mt-1">120</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-green-100 text-primary">
+                                <i data-feather="inbox" class="w-5 h-5" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Outbound Mails</p>
+                                <p class="text-2xl font-bold mt-1">80</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-blue-100 text-blue-500">
+                                <i data-feather="send" class="w-5 h-5" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Active Companies</p>
+                                <p class="text-2xl font-bold mt-1">15</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-purple-100 text-purple-500">
+                                <i data-feather="briefcase" class="w-5 h-5" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dashboard-card bg-white p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-sm text-gray-500">Active Fields</p>
+                                <p class="text-2xl font-bold mt-1">6</p>
+                            </div>
+                            <div class="p-3 rounded-lg bg-yellow-100 text-secondary">
+                                <i data-feather="map-pin" class="w-5 h-5" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Recent Messages Table -->
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden mb-6">
+                    <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+                        <h2 class="font-medium text-lg">Recent Messages</h2>
+                        <a href="nnpc-inbound.html" class="text-sm text-primary hover:underline focus-ring">View All</a>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full" role="grid">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">From</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">To</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-09-24</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Shell</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">NNPC</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">JV Update</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Read</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-primary hover:text-green-700 mr-2 focus-ring" aria-label="View message">
+                                            <i data-feather="eye" class="w-4 h-4" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-gray-700 focus-ring" aria-label="Download message">
+                                            <i data-feather="download" class="w-4 h-4" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-09-23</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Chevron</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">NNPC</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Meeting</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">Unread</span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                        <button class="text-primary hover:text-green-700 mr-2 focus-ring" aria-label="View message">
+                                            <i data-feather="eye" class="w-4 h-4" aria-hidden="true"></i>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-gray-700 focus-ring" aria-label="Download message">
+                                            <i data-feather="download" class="w-4 h-4" aria-hidden="true"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- Chart Placeholder -->
+                <div class="bg-white p-6 rounded-xl shadow-sm">
+                    <h3 class="font-medium mb-4">Activity Overview</h3>
+                    <div class="h-64 bg-gray-100 rounded flex items-center justify-center">
+                        <p class="text-gray-400">[Chart Placeholder - Activity Metrics]</p>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Feather icons
+            feather.replace();
+
+            // Expandable menu toggle
+            document.querySelectorAll('.toggle-menu').forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetId = button.getAttribute('data-target');
+                    const menu = document.getElementById(targetId);
+                    const chevron = button.querySelector('[data-feather="chevron-down"]');
+                    const isOpen = menu.classList.toggle('open');
+                    button.setAttribute('aria-expanded', isOpen);
+                    chevron.classList.toggle('rotate-180');
+                });
+            });
+
+            // Sidebar toggle for mobile
+            const sidebar = document.querySelector('.sidebar');
+            const toggleButton = document.getElementById('toggle-sidebar');
+            toggleButton.addEventListener('click', () => {
+                sidebar.classList.toggle('sidebar-closed');
+            });
+
+            // Close sidebar when clicking outside on mobile
+            document.addEventListener('click', (e) => {
+                if (window.innerWidth < 768 && !sidebar.contains(e.target) && !toggleButton.contains(e.target)) {
+                    sidebar.classList.add('sidebar-closed');
+                }
+            });
+
+            // Keyboard accessibility for expandable menus
+            document.querySelectorAll('.toggle-menu').forEach(button => {
+                button.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        button.click();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

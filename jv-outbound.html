@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engage | JV Partner – Outbound</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#00843D',
+                        secondary: '#FDB913',
+                        bglight: '#F5F5F5',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .sidebar {
+            transition: all 0.3s ease;
+        }
+        .dashboard-card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-bglight min-h-screen">
+    <div class="flex h-screen bg-bglight overflow-hidden">
+        <!-- Sidebar -->
+        <div class="sidebar bg-primary text-white w-64 flex-shrink-0">
+            <div class="p-4 border-b border-green-700">
+                <div class="flex items-center space-x-2">
+                    <i data-feather="shield" class="w-6 h-6"></i>
+                    <span class="font-bold text-lg">Engage - Shell</span>
+                </div>
+            </div>
+            <nav class="p-4 space-y-2">
+                <a href="jv.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition">
+                    <i data-feather="home" class="w-5 h-5"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="jv-inbound.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition">
+                    <i data-feather="inbox" class="w-5 h-5"></i>
+                    <span>Inbound</span>
+                </a>
+                <a href="jv-outbound.html" class="flex items-center space-x-2 p-2 rounded-lg bg-green-700">
+                    <i data-feather="send" class="w-5 h-5"></i>
+                    <span>Outbound</span>
+                </a>
+                <a href="jv-fields.html" class="flex items-center space-x-2 p-2 rounded-lg hover:bg-green-700 transition">
+                    <i data-feather="map-pin" class="w-5 h-5"></i>
+                    <span>Fields</span>
+                </a>
+            </nav>
+        </div>
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            <!-- Top Bar -->
+            <header class="bg-white border-b border-gray-200 py-3 px-6 flex items-center justify-between">
+                <span class="text-sm font-medium text-gray-800">Welcome, Shell JV</span>
+                <div class="flex items-center space-x-4">
+                    <button class="relative p-1 rounded-full hover:bg-gray-100">
+                        <i data-feather="bell" class="w-5 h-5 text-gray-600"></i>
+                        <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                    </button>
+                    <div class="flex items-center space-x-2">
+                        <div class="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center">
+                            <i data-feather="user" class="w-4 h-4 text-gray-600"></i>
+                        </div>
+                        <span class="text-sm font-medium">Shell JV</span>
+                    </div>
+                </div>
+            </header>
+            <!-- Main Content -->
+            <main class="flex-1 overflow-y-auto p-6">
+                <h1 class="text-2xl font-semibold mb-6">Outbound Messages</h1>
+                <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+                    <div class="p-4 border-b border-gray-200 flex items-center justify-between">
+                        <h2 class="font-medium text-lg">Recent Outbound Messages</h2>
+                        <button class="text-sm text-primary hover:underline">View All</button>
+                    </div>
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">To</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Subject</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-09-22</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">NNPC</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Production Update</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">Sent</span>
+                                    </td>
+                                </tr>
+                                <tr class="hover:bg-gray-50 transition">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2025-09-20</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Total JV</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Collaboration Proposal</td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">Delivered</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+    <script>
+        // Initialize feather icons
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
+</body>
+</html>
